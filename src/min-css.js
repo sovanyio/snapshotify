@@ -3,7 +3,11 @@ const postcss = require('postcss');
 
 const extractStyles = page => page.evaluate(() => {
   return [].concat(...[...document.styleSheets].map(stylesheet => {
-    return [...stylesheet.rules].map(rule => rule.cssText);
+    try {
+      return [...stylesheet.rules].map(rule => rule.cssText);
+    } catch (e) {
+      console.warn('Failed to access stylesheet from', stylesheet.href);
+    }
   }));
 });
 
