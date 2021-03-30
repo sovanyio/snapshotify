@@ -17,7 +17,8 @@ const defaultConfig = {
   addCSPHashes: true,
   cspAlgo: 'sha256',
   dryRun: false,
-  printConsoleLogs: false
+  printConsoleLogs: false,
+  removeEmptyStyleTags: true,
 };
 
 process.on('unhandledRejection', console.log);
@@ -33,7 +34,7 @@ try {
   config = JSON.parse(readFileSync(configFile));
 } catch(e) {}
 
-config = { ...config, ...defaultConfig };
+config = { ...defaultConfig, ...config };
 
 const port = 9000;
 const root = `http://localhost:${port}`;

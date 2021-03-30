@@ -37,8 +37,7 @@ module.exports = async ({ browser, path, config }) => {
   });
 
   await page.setBypassCSP(true);
-  await page.goto(path);
-  await delay(50);
+  await page.goto(path, {waitUntil: 'networkidle2'});
 
   if(config.printConsoleLogs) {
     page.on('console', msg => {
@@ -81,7 +80,9 @@ module.exports = async ({ browser, path, config }) => {
     await page.addScriptTag({ content: scriptContents });
   }
 
-  await removeEmptyStyleTags(page);
+  if(config.removeEmptyStyleTags) { 
+    await removeEmptyStyleTags(page);
+  }
 
   const [ markup, links ] = await Promise.all([
     minify(await page.content(), minifierOptions),
