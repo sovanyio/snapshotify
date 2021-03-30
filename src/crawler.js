@@ -13,6 +13,7 @@ module.exports = async ({ paths, root, config }) => {
       return l;
     })
     .filter(l => !enqueued.includes(l))   // Ensure we haven't seen it before
+    .filter(l => !l.includes('#')) // Remove hash links
     .map(l => { enqueued.push(l); return l; }); // Remember, and return
 
   const browser = await puppeteer.launch();
