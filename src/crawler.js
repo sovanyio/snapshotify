@@ -16,7 +16,9 @@ module.exports = async ({ paths, root, config }) => {
     .filter(l => !l.includes('#')) // Remove hash links
     .map(l => { enqueued.push(l); return l; }); // Remember, and return
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
 
   const queue = cq().limit({ concurrency: 10 }).process(async path => {
     try {
