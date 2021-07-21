@@ -57,7 +57,7 @@ const write = async (diskPath, markup) => {
 
   const app = createExpressApp(path.join(process.cwd(), 'build'));
   const server = await app.listen(port);
-  const filesToWrite = await crawl({ paths: [`${root}/`, `${root}/404`], root, config });
+  const filesToWrite = await crawl({ paths: [`${root}/`, `${root}/404`].concat(config.manualLinks.map(link => `${root}${link}`)), root, config });
   filesToWrite.push({ path: `${root}/200`, markup: await promisify(readFile)(path.join('.', 'build', 'index.html')), lint: [] });
   await server.close();
 
