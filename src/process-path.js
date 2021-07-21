@@ -84,10 +84,11 @@ module.exports = async ({ browser, path, config }) => {
     await removeEmptyStyleTags(page);
   }
 
-  const [ markup, links ] = await Promise.all([
+  const [ markup, crawledLinks ] = await Promise.all([
     minify(await page.content(), minifierOptions),
     getLinksOnPage(page)
   ]);
+  const links = crawledLinks.concat(config.manualLinks);
 
   const lint = await getLintResults(page);
 

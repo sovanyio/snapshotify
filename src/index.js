@@ -19,6 +19,7 @@ const defaultConfig = {
   dryRun: false,
   printConsoleLogs: false,
   removeEmptyStyleTags: true,
+  manualLinks: [],
 };
 
 process.on('unhandledRejection', console.log);
