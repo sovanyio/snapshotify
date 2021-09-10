@@ -8,7 +8,7 @@
   "scripts": {
     "test": "mocha",
     "pretest": "eslint . --fix",
-    "buildx": "babel ./src/load-scripts.js --presets babel-preset-es2015 --out-file build/load-scripts.js"
+    "build": "babel ./src/load-scripts.js --presets babel-preset-es2015 --out-file build/load-scripts.js"
   },
   "bin": {
     "snapshotify": "src/index.js"
